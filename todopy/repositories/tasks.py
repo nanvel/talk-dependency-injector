@@ -1,4 +1,3 @@
-from shelve import Shelf
 from typing import Generator
 from operator import attrgetter
 
@@ -9,7 +8,7 @@ from ..models import Priority, Task
 class TasksRepository:
     TASKS_KEY = "tasks"
 
-    def __init__(self, shelf: Shelf, task_factory: TaskFactory):
+    def __init__(self, shelf: dict, task_factory: TaskFactory):
         if not shelf.get(self.TASKS_KEY):
             shelf[self.TASKS_KEY] = []
 

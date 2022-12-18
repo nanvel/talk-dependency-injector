@@ -15,6 +15,8 @@ Tools:
 poetry install
 poetry shell
 
+pytest tests
+
 todopy --help
 todopy set-priority --help
 

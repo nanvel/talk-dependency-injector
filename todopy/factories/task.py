@@ -1,13 +1,13 @@
 from datetime import datetime
+from typing import Generator
 
 import pytz
 
-from ..enumerators import BaseEnumerator
 from ..models import Task, Priority
 
 
 class TaskFactory:
-    def __init__(self, enumerator: BaseEnumerator):
+    def __init__(self, enumerator: Generator[int, None, None]):
         self.enumerator = enumerator
 
     def from_dict(self, data: dict) -> Task:
