@@ -35,6 +35,13 @@ def delete(task_id: int):
 
 
 @app.command()
+def edit(task_id: int, text: str):
+    container.init_resources()
+    container.edit_task().call(task_id=task_id, text=text)
+    container.shutdown_resources()
+
+
+@app.command()
 def set_priority(task_id: int, priority: Priority):
     container.init_resources()
     container.set_priority().call(task_id=task_id, priority=priority)

@@ -63,3 +63,13 @@ def test_set_priority(repository, task):
 
     (task,) = repository.get_all()
     assert task.priority == Priority.HIGH
+
+
+def test_edit(repository, task):
+    text = "Edited"
+    repository.insert(task)
+
+    repository.edit(task_id=task.id, text=text)
+
+    (task,) = repository.get_all()
+    assert task.text == text

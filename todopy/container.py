@@ -6,7 +6,7 @@ from .printers import CsvPrinter, TextPrinter
 from .repositories import TasksRepository
 from .resources import init_tasks_shelf
 from .settings import Settings
-from .use_cases import CreateTask, DeleteTask, PrintTasks, SetPriority
+from .use_cases import CreateTask, DeleteTask, EditTask, PrintTasks, SetPriority
 
 
 class Container(containers.DeclarativeContainer):
@@ -30,6 +30,7 @@ class Container(containers.DeclarativeContainer):
     create_task = providers.Factory(
         CreateTask, tasks_repository=tasks_repository, task_factory=task_factory
     )
+    edit_task = providers.Factory(EditTask, tasks_repository=tasks_repository)
     delete_task = providers.Factory(DeleteTask, tasks_repository=tasks_repository)
     print_tasks = providers.Factory(
         PrintTasks, tasks_repository=tasks_repository, printer=text_printer

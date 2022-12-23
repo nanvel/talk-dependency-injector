@@ -26,15 +26,22 @@ class TasksRepository:
     def insert(self, task: Task) -> None:
         self.shelf[self.TASKS_KEY] = self.shelf[self.TASKS_KEY] + [task.dict()]
 
+    def edit(self, task_id: int, text: str):
+        self._edit(task_id=task_id, text=text)
+
     def delete_by_id(self, task_id: int) -> None:
         self.shelf[self.TASKS_KEY] = [
             task.dict() for task in self.tasks() if task.id != task_id
         ]
 
     def set_priority(self, task_id: int, priority: Priority) -> None:
+        self._edit(task_id=task_id, priority=priority)
+
+    def _edit(self, task_id: int, **changes) -> None:
         for n, task in enumerate(self.tasks()):
             if task.id == task_id:
-                task.priority = priority
+                for k, v in changes.items():
+                    setattr(task, k, v)
                 self.shelf[self.TASKS_KEY] = (
                     self.shelf[self.TASKS_KEY][:n]
                     + [task.dict()]
